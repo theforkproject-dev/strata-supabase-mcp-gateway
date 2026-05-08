@@ -1,0 +1,87 @@
+cvm-version: 0.7.5
+cpus: 2
+memory: 8192
+
+containers:
+  - name: "supabase-mcp-gateway"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-001@sha256:2ce705be10503f2d30d2672d558d16d0815efe40dc894bd0385f5f5dc753f9f5"
+    env:
+      - HOST: "0.0.0.0"
+      - PORT: "8080"
+      - NODE_OPTIONS: "--dns-result-order=ipv4first"
+      - STRATA_GATEWAY_KIND: "supabase"
+      - DATA_DIR: "/mnt/ramdisk/supabase-mcp"
+      - PUBLIC_BASE_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev"
+      - CERTIFICATE_BASE_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/certificates"
+      - OAUTH_ISSUER: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev"
+      - OAUTH_STORE_BACKEND: "dynamodb"
+      - OAUTH_DYNAMODB_TABLE: "strata-oauth-poc-oauth-store-345337478194"
+      - OAUTH_DYNAMODB_AWS_REGION: "us-east-2"
+      - OAUTH_DYNAMODB_TTL_ATTRIBUTE: "ttl"
+      - OAUTH_REFRESH_TOKEN_TTL_SECONDS: "604800"
+      - CERTIFICATE_BUNDLE_STORE_BACKEND: "s3-cloudfront"
+      - CERTIFICATE_BUNDLE_AWS_REGION: "us-east-2"
+      - CERTIFICATE_BUNDLE_S3_BUCKET: "strata-certificate-bundles-poc-345337478194"
+      - CERTIFICATE_BUNDLE_S3_PREFIX: "certificates"
+      - CERTIFICATE_BUNDLE_PUBLIC_BASE: "https://d33vpkebicuw51.cloudfront.net/certificates"
+      - CERTIFICATE_BUNDLE_LOCK_MODE: "GOVERNANCE"
+      - CERTIFICATE_BUNDLE_PUBLISH_REQUIRED: "true"
+      - SUPABASE_CONNECTOR_ID: "heyjil-supabase-pilot"
+      - SUPABASE_CONNECTOR_LABEL: "HeyJil Supabase Pilot"
+      - SUPABASE_PROJECT_REF: "ghmfczkhbwfftvpsrghy"
+      - SUPABASE_MCP_READ_ONLY: "true"
+      - SUPABASE_MCP_FEATURES: "database,docs"
+      - SUPABASE_MCP_BASE_URL: "https://mcp.supabase.com/mcp"
+      - SUPABASE_ENABLE_UPSTREAM_CALLS: "false"
+      - SUPABASE_EVIDENCE_MODE: "digest-only"
+      - SUPABASE_QUERY_MAX_ROWS: "100"
+      - SUPABASE_QUERY_TIMEOUT_MS: "30000"
+      - SUPABASE_BLOCKED_SCHEMAS: "auth,storage,vault"
+      - SUPABASE_OAUTH_TOKEN_AUTH_METHOD: "client_secret_basic"
+      - SUPABASE_OAUTH_REDIRECT_URI: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/connectors/supabase/oauth/callback"
+      - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev,strata-witness-poc-2=https://strata-witness-poc-2.amotivv.containers.tinfoil.dev,strata-witness-poc-3=https://strata-witness-poc-3.amotivv.containers.tinfoil.dev"
+      - WITNESS_THRESHOLD: "2"
+      - GATEWAY_SIGNED_WITNESS_REQUESTS_ENABLED: "true"
+      - GATEWAY_ID: "gateway:strata-poc-demo"
+      - GATEWAY_KEY_ID: "gateway:strata-poc-demo:epoch-tinfoil-001"
+      - WITNESS_EPOCH_ID: "wit_epoch_tinfoil_poc_003"
+      - REGISTRY_EPOCH_ID: "registry_epoch_tinfoil_poc_004"
+      - WITNESS_WORKFLOW_ID: "supabase.query"
+      - POLICY_WITNESS_URLS: "p1=https://strata-email-policy-witness-1.fly.dev,p2=https://strata-email-policy-witness-2.fly.dev,p3=https://strata-email-policy-witness-3.fly.dev"
+      - POLICY_WITNESS_THRESHOLD: "2"
+      - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
+      - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.1"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:2ce705be10503f2d30d2672d558d16d0815efe40dc894bd0385f5f5dc753f9f5"
+      - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
+      - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
+      - TENANT_ID: "default"
+      - OPERATOR_ID: "operator:amotivv-demo"
+      - OPERATOR_ADMISSION_KEY_ID: "operator-admission:amotivv-demo"
+    secrets:
+      - MCP_SESSION_SECRET
+      - OAUTH_CONSENT_PASSWORD_SHA256
+      - OAUTH_DYNAMODB_AWS_ACCESS_KEY_ID
+      - OAUTH_DYNAMODB_AWS_SECRET_ACCESS_KEY
+      - CERTIFICATE_BUNDLE_AWS_ACCESS_KEY_ID
+      - CERTIFICATE_BUNDLE_AWS_SECRET_ACCESS_KEY
+      - GATEWAY_KEY_JSON
+      - OPERATOR_ADMISSION_KEY_JSON
+    command: ["node", "src/server.js"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+    restart: always
+
+shim:
+  upstream-port: 8080
+  paths:
+    - /health
+    - /mcp
+    - /certificates/*
+    - /.well-known/*
+    - /oauth/*
+    - /connectors/*
