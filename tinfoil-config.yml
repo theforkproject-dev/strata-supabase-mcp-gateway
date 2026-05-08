@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "supabase-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-001@sha256:2ce705be10503f2d30d2672d558d16d0815efe40dc894bd0385f5f5dc753f9f5"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-002@sha256:b3481ac479d59bde6ad8b1ebb95c8e7fa3c4db801898a3504eee4340942a5cc2"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -38,6 +38,8 @@ containers:
       - SUPABASE_QUERY_TIMEOUT_MS: "30000"
       - SUPABASE_BLOCKED_SCHEMAS: "auth,storage,vault"
       - SUPABASE_OAUTH_TOKEN_AUTH_METHOD: "client_secret_basic"
+      - SUPABASE_OAUTH_AUTHORIZATION_URL: "https://api.supabase.com/v1/oauth/authorize"
+      - SUPABASE_OAUTH_TOKEN_URL: "https://api.supabase.com/v1/oauth/token"
       - SUPABASE_OAUTH_REDIRECT_URI: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/connectors/supabase/oauth/callback"
       - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev,strata-witness-poc-2=https://strata-witness-poc-2.amotivv.containers.tinfoil.dev,strata-witness-poc-3=https://strata-witness-poc-3.amotivv.containers.tinfoil.dev"
       - WITNESS_THRESHOLD: "2"
@@ -51,8 +53,8 @@ containers:
       - POLICY_WITNESS_THRESHOLD: "2"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.1"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:2ce705be10503f2d30d2672d558d16d0815efe40dc894bd0385f5f5dc753f9f5"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.2"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:b3481ac479d59bde6ad8b1ebb95c8e7fa3c4db801898a3504eee4340942a5cc2"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - TENANT_ID: "default"
@@ -67,6 +69,8 @@ containers:
       - CERTIFICATE_BUNDLE_AWS_SECRET_ACCESS_KEY
       - GATEWAY_KEY_JSON
       - OPERATOR_ADMISSION_KEY_JSON
+      - SUPABASE_OAUTH_CLIENT_ID
+      - SUPABASE_OAUTH_CLIENT_SECRET
     command: ["node", "src/server.js"]
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
