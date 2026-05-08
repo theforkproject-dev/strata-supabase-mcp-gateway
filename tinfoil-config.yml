@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "supabase-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-004@sha256:3876ae3572393cba9a5fab4109b6df713205790c1dcd080830e9880590313ff1"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-005@sha256:705f1bbe0fb1c1c3d2d5de57f4f440804ae6062208336209ff07f618c728de75"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -40,6 +40,7 @@ containers:
       - SUPABASE_OAUTH_TOKEN_AUTH_METHOD: "client_secret_basic"
       - SUPABASE_OAUTH_AUTHORIZATION_URL: "https://api.supabase.com/v1/oauth/authorize"
       - SUPABASE_OAUTH_TOKEN_URL: "https://api.supabase.com/v1/oauth/token"
+      - SUPABASE_OAUTH_RESOURCE: "https://mcp.supabase.com/mcp?project_ref=ghmfczkhbwfftvpsrghy&read_only=true&features=database,docs"
       - SUPABASE_OAUTH_REDIRECT_URI: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/connectors/supabase/oauth/callback"
       - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev,strata-witness-poc-2=https://strata-witness-poc-2.amotivv.containers.tinfoil.dev,strata-witness-poc-3=https://strata-witness-poc-3.amotivv.containers.tinfoil.dev"
       - WITNESS_THRESHOLD: "2"
@@ -53,8 +54,8 @@ containers:
       - POLICY_WITNESS_THRESHOLD: "2"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.5"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:3876ae3572393cba9a5fab4109b6df713205790c1dcd080830e9880590313ff1"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.6"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:705f1bbe0fb1c1c3d2d5de57f4f440804ae6062208336209ff07f618c728de75"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - TENANT_ID: "default"
