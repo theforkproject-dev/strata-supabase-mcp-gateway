@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "supabase-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-008@sha256:0ee85771d52698697ba0fee3c471c86d4c0746f4d7b8369c93d0cf0d954e18b2"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-009@sha256:5cabd2a3c474f3adb0b79631468f4b9c07242b0825173184c523e667410c00bd"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -19,6 +19,7 @@ containers:
       - OAUTH_DYNAMODB_AWS_REGION: "us-east-2"
       - OAUTH_DYNAMODB_TTL_ATTRIBUTE: "ttl"
       - OAUTH_REFRESH_TOKEN_TTL_SECONDS: "604800"
+      - CONNECTOR_CREDENTIAL_STORE_BACKEND: "dynamodb"
       - CERTIFICATE_BUNDLE_STORE_BACKEND: "s3-cloudfront"
       - CERTIFICATE_BUNDLE_AWS_REGION: "us-east-2"
       - CERTIFICATE_BUNDLE_S3_BUCKET: "strata-certificate-bundles-poc-345337478194"
@@ -56,8 +57,8 @@ containers:
       - POLICY_WITNESS_THRESHOLD: "2"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.8"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:0ee85771d52698697ba0fee3c471c86d4c0746f4d7b8369c93d0cf0d954e18b2"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.9"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:5cabd2a3c474f3adb0b79631468f4b9c07242b0825173184c523e667410c00bd"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - TENANT_ID: "default"
