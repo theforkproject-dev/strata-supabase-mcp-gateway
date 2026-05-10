@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "supabase-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-011@sha256:c002a65556fe67b16a33f6ef6742a266e9793d2e3f81f9d1f28ce6420b5471bc"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-013@sha256:0b0e0699ef5e9d651b30b4278de8e0df414f466f96096123e5fd86894ca18a74"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -64,8 +64,8 @@ containers:
       - REGISTRY_TRUST_ANCHOR_PUBLIC_KEY_PEM_BASE64: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQUN2empUb1lvMllNQjlMVnJBZ2ZpeGRvOTBOdXFZeElCekZyclJkZjB1dTQ9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo="
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.12"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:c002a65556fe67b16a33f6ef6742a266e9793d2e3f81f9d1f28ce6420b5471bc"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.13"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:0b0e0699ef5e9d651b30b4278de8e0df414f466f96096123e5fd86894ca18a74"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - TENANT_ID: "default"
