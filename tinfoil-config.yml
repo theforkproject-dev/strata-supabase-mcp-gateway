@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "supabase-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-013@sha256:0b0e0699ef5e9d651b30b4278de8e0df414f466f96096123e5fd86894ca18a74"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-supabase-gateway-014@sha256:5d44512ec99d42c2ba5040cf6bb8abe14858910e8d26d9b6e10ed61f24dcb21d"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -64,10 +64,11 @@ containers:
       - REGISTRY_TRUST_ANCHOR_PUBLIC_KEY_PEM_BASE64: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQUN2empUb1lvMllNQjlMVnJBZ2ZpeGRvOTBOdXFZeElCekZyclJkZjB1dTQ9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo="
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-supabase-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-supabase-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.13"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:0b0e0699ef5e9d651b30b4278de8e0df414f466f96096123e5fd86894ca18a74"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-supabase-gateway.14"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:5d44512ec99d42c2ba5040cf6bb8abe14858910e8d26d9b6e10ed61f24dcb21d"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-supabase-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
+      - L1_TINFOIL_EVIDENCE_JSON: '[{"witness_id":"strata-witness-poc-1","container_name":"strata-witness-poc-1","config_repo":"theforkproject-dev/strata-witness-poc-1","config_tag":"v0.1.0-witness-poc.4","image_digest":"sha256:724aa1e7a2680018f277907cb376c7f2d11df5acdd1a81c4bb0b747f6bc70a35","attestation_digest":"5b84a7c9f8e829dd664492d7452278e4ba421a7c8c5748f39573f86e8d53d649","attestation_url":"https://strata-witness-poc-1.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation","witness_epoch_id":"wit_epoch_tinfoil_poc_003","registry_epoch_id":"registry_epoch_tinfoil_poc_005","workflow_id":"supabase.query","registry_pointer_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/current.json","registry_trust_anchors_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/trust-anchors.json"},{"witness_id":"strata-witness-poc-2","container_name":"strata-witness-poc-2","config_repo":"theforkproject-dev/strata-witness-poc-2","config_tag":"v0.1.0-witness-poc.2","image_digest":"sha256:724aa1e7a2680018f277907cb376c7f2d11df5acdd1a81c4bb0b747f6bc70a35","attestation_digest":"53c0e9c27ced3a743b70aa81ace7bfd5307f44dfc75c0929a58dae79198a0cc2","attestation_url":"https://strata-witness-poc-2.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation","witness_epoch_id":"wit_epoch_tinfoil_poc_2_001","registry_epoch_id":"registry_epoch_tinfoil_poc_005","workflow_id":"supabase.query","registry_pointer_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/current.json","registry_trust_anchors_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/trust-anchors.json"},{"witness_id":"strata-witness-poc-3","container_name":"strata-witness-poc-3","config_repo":"theforkproject-dev/strata-witness-poc-3","config_tag":"v0.1.0-witness-poc.2","image_digest":"sha256:724aa1e7a2680018f277907cb376c7f2d11df5acdd1a81c4bb0b747f6bc70a35","attestation_digest":"76c8766542f90fbd502dc029d47c685d46d7dccb35a99dcde0e388df9e203ebb","attestation_url":"https://strata-witness-poc-3.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation","witness_epoch_id":"wit_epoch_tinfoil_poc_3_001","registry_epoch_id":"registry_epoch_tinfoil_poc_005","workflow_id":"supabase.query","registry_pointer_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/current.json","registry_trust_anchors_url":"https://d2oeah1vhl8c0o.cloudfront.net/registry/witness/trust-anchors.json"}]'
       - TENANT_ID: "default"
       - OPERATOR_ID: "operator:amotivv-demo"
       - OPERATOR_ADMISSION_KEY_ID: "operator-admission:amotivv-demo"
